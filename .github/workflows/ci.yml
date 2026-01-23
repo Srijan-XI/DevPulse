@@ -51,6 +51,8 @@ jobs:
     
     - name: Verify imports work
       shell: bash
+      env:
+        PYTHONIOENCODING: utf-8
       run: |
         python -c "from core.scanner import Scanner; print('✓ Scanner import OK')"
         python -c "from core.reporter import Reporter; print('✓ Reporter import OK')"
