@@ -1,0 +1,79 @@
+/* Custom styles for DevPulse documentation */
+
+:root {
+  --md-primary-fg-color: #4f46e5;
+  --md-primary-fg-color--light: #6366f1;
+  --md-primary-fg-color--dark: #4338ca;
+  --md-accent-fg-color: #4f46e5;
+}
+
+/* Enhanced code blocks */
+.highlight {
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+/* Custom admonitions styling */
+.admonition {
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Improve table appearance */
+table {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Homepage enhancements */
+.md-typeset h1 {
+  font-weight: 700;
+  color: var(--md-primary-fg-color);
+}
+
+/* Feature cards */
+.feature-card {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background: var(--md-code-bg-color);
+  margin: 1rem 0;
+  transition: transform 0.2s;
+}
+
+.feature-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Code copy button enhancement */
+.md-clipboard {
+  transition: opacity 0.2s;
+}
+
+.md-clipboard:hover {
+  opacity: 1;
+}
+
+/* Navigation tabs enhancement */
+.md-tabs {
+  background: linear-gradient(to right, var(--md-primary-fg-color), var(--md-primary-fg-color--light));
+}
+
+/* Footer styling */
+.md-footer {
+  background: var(--md-default-fg-color--lightest);
+}
+
+/* Custom emoji sizing */
+.twemoji {
+  height: 1.2em;
+  vertical-align: text-bottom;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 76.1875em) {
+  .md-nav--primary .md-nav__title {
+    background-color: var(--md-primary-fg-color);
+  }
+}
