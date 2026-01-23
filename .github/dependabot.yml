@@ -14,7 +14,4 @@ updates:
       - "type/ci"
     commit-message:
       prefix: "ci"
-      include: "scope"
-    reviewers:
-      - "devpulse-maintainers"
     open-pull-requests-limit: 5
