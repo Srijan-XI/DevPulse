@@ -1,0 +1,10 @@
+Our Prompt
+Your mandate is to build an application using GitHub Copilot CLI.
+What should you build? That's entirely up to you! Here are some ideas to get you started:
+
+Productivity boosters: Tools that make your daily workflow smoother
+Fun experiments: That silly idea you've always wanted an excuse to build
+Problem solvers: Solutions to common pain points you or others face
+Creative utilities: Unique tools that showcase what Copilot CLI can do
+The most important aspect? Show us how GitHub Copilot CLI enhances your development process and 
+helps you build something awesome.
