@@ -55,10 +55,10 @@ jobs:
         python -c "from core.scanner import Scanner; print('✓ Scanner import OK')"
         python -c "from core.reporter import Reporter; print('✓ Reporter import OK')"
         python -c "from core.fixer import Fixer; print('✓ Fixer import OK')"
-        python -c "from checks.stack import check_tech_stack; print('✓ Stack check OK')"
-        python -c "from checks.hygiene import check_hygiene; print('✓ Hygiene check OK')"
-        python -c "from checks.security import check_security; print('✓ Security check OK')"
-        python -c "from checks.size import check_size; print('✓ Size check OK')"
+        python -c "from checks.stack import run_stack_check; print('✓ Stack check OK')"
+        python -c "from checks.hygiene import run_hygiene_check; print('✓ Hygiene check OK')"
+        python -c "from checks.security import run_security_check; print('✓ Security check OK')"
+        python -c "from checks.size import run_size_check; print('✓ Size check OK')"
     
     - name: Test GUI imports (non-interactive)
       if: runner.os != 'Windows'

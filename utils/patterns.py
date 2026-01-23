@@ -269,6 +269,7 @@ def count_todos(file_path: Path) -> int:
             count += len(re.findall(r'\bTODO\b', content, re.IGNORECASE))
             count += len(re.findall(r'\bFIXME\b', content, re.IGNORECASE))
     except (OSError, UnicodeDecodeError):
+        # Silently skip files that can't be read - return 0 count
         pass
     
     return count

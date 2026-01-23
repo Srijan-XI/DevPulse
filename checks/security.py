@@ -18,6 +18,10 @@ def run_security_check(metadata: Dict[str, Any]) -> List[Dict[str, Any]]:
     root = metadata.get('root')
     files = metadata.get('files', [])
     
+    # Guard against missing root
+    if not root:
+        return results
+    
     # Check if .env file is tracked
     env_files = ['.env', '.env.local', '.env.production', '.env.development']
     for env_file in env_files:
@@ -33,6 +37,7 @@ def run_security_check(metadata: Dict[str, Any]) -> List[Dict[str, Any]]:
                         if env_file in gitignore_content or '.env' in gitignore_content:
                             is_ignored = True
                 except (OSError, UnicodeDecodeError):
+                    # Silently ignore if .gitignore can't be read - treat as not ignored for safety
                     pass
             
             if not is_ignored:
