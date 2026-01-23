@@ -4,8 +4,8 @@ DevPulse GUI - Graphical interface for DevPulse project health checker.
 """
 
 import sys
-import tkinter as tk
-from tkinter import ttk, filedialog, messagebox, scrolledtext
+from tkinter import (Tk, StringVar, ttk, filedialog, messagebox, scrolledtext,
+                     X, Y, LEFT, RIGHT, BOTTOM, BOTH, END, WORD, SUNKEN, DISABLED, NORMAL)
 from pathlib import Path
 import json
 import threading
@@ -57,41 +57,41 @@ class DevPulseGUI:
         """Create all GUI widgets."""
         # Top frame - Project selection
         top_frame = ttk.Frame(self.root, padding="10")
-        top_frame.pack(fill=tk.X)
+        top_frame.pack(fill=X)
         
-        ttk.Label(top_frame, text="Project Path:").pack(side=tk.LEFT, padx=(0, 5))
+        ttk.Label(top_frame, text="Project Path:").pack(side=LEFT, padx=(0, 5))
         
-        self.path_var = tk.StringVar(value=self.project_path)
+        self.path_var = StringVar(value=self.project_path)
         path_entry = ttk.Entry(top_frame, textvariable=self.path_var, width=50)
-        path_entry.pack(side=tk.LEFT, padx=5, fill=tk.X, expand=True)
+        path_entry.pack(side=LEFT, padx=5, fill=X, expand=True)
         
-        ttk.Button(top_frame, text="Browse...", command=self.browse_folder).pack(side=tk.LEFT, padx=5)
+        ttk.Button(top_frame, text="Browse...", command=self.browse_folder).pack(side=LEFT, padx=5)
         
         # Action buttons frame
         button_frame = ttk.Frame(self.root, padding="10")
-        button_frame.pack(fill=tk.X)
+        button_frame.pack(fill=X)
         
         self.scan_button = ttk.Button(button_frame, text="🔍 Scan Project", command=self.scan_project)
-        self.scan_button.pack(side=tk.LEFT, padx=5)
+        self.scan_button.pack(side=LEFT, padx=5)
         
-        self.fix_button = ttk.Button(button_frame, text="🔧 Fix Issues", command=self.fix_issues, state=tk.DISABLED)
-        self.fix_button.pack(side=tk.LEFT, padx=5)
+        self.fix_button = ttk.Button(button_frame, text="🔧 Fix Issues", command=self.fix_issues, state=DISABLED)
+        self.fix_button.pack(side=LEFT, padx=5)
         
-        ttk.Button(button_frame, text="💾 Export JSON", command=self.export_json).pack(side=tk.LEFT, padx=5)
-        ttk.Button(button_frame, text="📋 Copy Report", command=self.copy_report).pack(side=tk.LEFT, padx=5)
+        ttk.Button(button_frame, text="💾 Export JSON", command=self.export_json).pack(side=LEFT, padx=5)
+        ttk.Button(button_frame, text="📋 Copy Report", command=self.copy_report).pack(side=LEFT, padx=5)
         
         # Progress bar
         self.progress = ttk.Progressbar(self.root, mode='indeterminate')
-        self.progress.pack(fill=tk.X, padx=10)
+        self.progress.pack(fill=X, padx=10)
         
         # Status label
-        self.status_var = tk.StringVar(value="Ready. Select a project and click 'Scan Project'.")
-        status_label = ttk.Label(self.root, textvariable=self.status_var, relief=tk.SUNKEN)
-        status_label.pack(fill=tk.X, padx=10, pady=5)
+        self.status_var = StringVar(value="Ready. Select a project and click 'Scan Project'.")
+        status_label = ttk.Label(self.root, textvariable=self.status_var, relief=SUNKEN)
+        status_label.pack(fill=X, padx=10, pady=5)
         
         # Notebook for results
         self.notebook = ttk.Notebook(self.root)
-        self.notebook.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+        self.notebook.pack(fill=BOTH, expand=True, padx=10, pady=10)
         
         # Summary tab
         self.summary_frame = ttk.Frame(self.notebook)
@@ -112,7 +112,7 @@ class DevPulseGUI:
         """Create summary statistics tab."""
         # Summary cards frame
         cards_frame = ttk.Frame(self.summary_frame, padding="10")
-        cards_frame.pack(fill=tk.BOTH, expand=True)
+        cards_frame.pack(fill=BOTH, expand=True)
         
         # Create summary cards
         self.critical_label = self.create_stat_card(cards_frame, "Critical Issues", "0", "#dc3545", 0, 0)
@@ -141,19 +141,19 @@ class DevPulseGUI:
         """Create detailed results tab."""
         # Create treeview for results
         tree_frame = ttk.Frame(self.details_frame)
-        tree_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+        tree_frame.pack(fill=BOTH, expand=True, padx=10, pady=10)
         
         # Scrollbars
         vsb = ttk.Scrollbar(tree_frame, orient="vertical")
-        vsb.pack(side=tk.RIGHT, fill=tk.Y)
+        vsb.pack(side=RIGHT, fill=Y)
         
         hsb = ttk.Scrollbar(tree_frame, orient="horizontal")
-        hsb.pack(side=tk.BOTTOM, fill=tk.X)
+        hsb.pack(side=BOTTOM, fill=X)
         
         # Treeview
         self.tree = ttk.Treeview(tree_frame, columns=("Status", "Name", "Details", "Fixable"), 
                                  yscrollcommand=vsb.set, xscrollcommand=hsb.set)
-        self.tree.pack(fill=tk.BOTH, expand=True)
+        self.tree.pack(fill=BOTH, expand=True)
         
         vsb.config(command=self.tree.yview)
         hsb.config(command=self.tree.xview)
@@ -177,11 +177,11 @@ class DevPulseGUI:
     
     def create_tech_tab(self):
         """Create tech stack visualization tab."""
-        self.tech_text = scrolledtext.ScrolledText(self.tech_frame, wrap=tk.WORD, 
+        self.tech_text = scrolledtext.ScrolledText(self.tech_frame, wrap=WORD, 
                                                     font=("Consolas", 10), height=20)
-        self.tech_text.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+        self.tech_text.pack(fill=BOTH, expand=True, padx=10, pady=10)
         self.tech_text.insert(1.0, "No scan performed yet. Click 'Scan Project' to detect tech stack.")
-        self.tech_text.config(state=tk.DISABLED)
+        self.tech_text.config(state=DISABLED)
     
     def browse_folder(self):
         """Open folder browser dialog."""
@@ -204,8 +204,8 @@ class DevPulseGUI:
             return
         
         # Disable scan button and show progress
-        self.scan_button.config(state=tk.DISABLED)
-        self.fix_button.config(state=tk.DISABLED)
+        self.scan_button.config(state=DISABLED)
+        self.fix_button.config(state=DISABLED)
         self.progress.start()
         self.status_var.set("Scanning project...")
         
@@ -227,19 +227,19 @@ class DevPulseGUI:
     def scan_error(self, error_msg):
         """Handle scan error."""
         self.progress.stop()
-        self.scan_button.config(state=tk.NORMAL)
+        self.scan_button.config(state=NORMAL)
         self.status_var.set("Scan failed.")
         messagebox.showerror("Scan Error", f"Failed to scan project:\n{error_msg}")
     
     def update_results(self):
         """Update UI with scan results."""
         self.progress.stop()
-        self.scan_button.config(state=tk.NORMAL)
+        self.scan_button.config(state=NORMAL)
         
         # Check if there are fixable issues
         fixable_count = len([r for r in self.results if r.get('fixable')])
         if fixable_count > 0:
-            self.fix_button.config(state=tk.NORMAL)
+            self.fix_button.config(state=NORMAL)
         
         # Update summary statistics
         critical_count = len([r for r in self.results if r.get('status') == 'critical'])
@@ -267,7 +267,7 @@ class DevPulseGUI:
             details = result.get('details', '')
             fixable = '✓' if result.get('fixable') else ''
             
-            self.tree.insert('', tk.END, text=symbol, 
+            self.tree.insert('', END, text=symbol, 
                            values=(status.upper(), name, details, fixable),
                            tags=(status,))
         
@@ -284,8 +284,8 @@ class DevPulseGUI:
     
     def update_tech_stack(self):
         """Update tech stack visualization."""
-        self.tech_text.config(state=tk.NORMAL)
-        self.tech_text.delete(1.0, tk.END)
+        self.tech_text.config(state=NORMAL)
+        self.tech_text.delete(1.0, END)
         
         # Get tech stack info
         tech_result = next((r for r in self.results if r.get('name') == 'Tech Stack'), None)
@@ -293,31 +293,31 @@ class DevPulseGUI:
         if tech_result and tech_result.get('data'):
             tech_stack = tech_result['data']
             
-            self.tech_text.insert(tk.END, "Detected Technologies:\n\n", "header")
+            self.tech_text.insert(END, "Detected Technologies:\n\n", "header")
             for tech in tech_stack:
-                self.tech_text.insert(tk.END, f"  ✓ {tech}\n", "tech")
+                self.tech_text.insert(END, f"  ✓ {tech}\n", "tech")
             
-            self.tech_text.insert(tk.END, f"\n\nProject Information:\n\n", "header")
-            self.tech_text.insert(tk.END, f"  Files: {self.metadata.get('file_count', 0)}\n")
-            self.tech_text.insert(tk.END, f"  Size: {self.format_size(self.metadata.get('total_size', 0))}\n")
+            self.tech_text.insert(END, f"\n\nProject Information:\n\n", "header")
+            self.tech_text.insert(END, f"  Files: {self.metadata.get('file_count', 0)}\n")
+            self.tech_text.insert(END, f"  Size: {self.format_size(self.metadata.get('total_size', 0))}\n")
             
             # Show file extensions
             extensions = self.metadata.get('extensions', {})
             if extensions:
-                self.tech_text.insert(tk.END, f"\n\nFile Types:\n\n", "header")
+                self.tech_text.insert(END, f"\n\nFile Types:\n\n", "header")
                 sorted_ext = sorted(extensions.items(), key=lambda x: x[1], reverse=True)
                 for ext, count in sorted_ext[:10]:
-                    self.tech_text.insert(tk.END, f"  {ext}: {count} file(s)\n")
+                    self.tech_text.insert(END, f"  {ext}: {count} file(s)\n")
         else:
-            self.tech_text.insert(tk.END, "No technology stack detected.\n\n")
-            self.tech_text.insert(tk.END, "This might be a general-purpose project or using ")
-            self.tech_text.insert(tk.END, "technologies not yet recognized by DevPulse.")
+            self.tech_text.insert(END, "No technology stack detected.\n\n")
+            self.tech_text.insert(END, "This might be a general-purpose project or using ")
+            self.tech_text.insert(END, "technologies not yet recognized by DevPulse.")
         
         # Configure tags
         self.tech_text.tag_config("header", font=("Arial", 12, "bold"))
         self.tech_text.tag_config("tech", foreground="#28a745", font=("Consolas", 10))
         
-        self.tech_text.config(state=tk.DISABLED)
+        self.tech_text.config(state=DISABLED)
     
     def fix_issues(self):
         """Fix issues interactively."""
@@ -408,7 +408,7 @@ class DevPulseGUI:
 
 def main():
     """Main entry point for GUI."""
-    root = tk.Tk()
+    root = Tk()
     app = DevPulseGUI(root)
     root.mainloop()
 
