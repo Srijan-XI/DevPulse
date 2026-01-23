@@ -1,0 +1,20 @@
+# Dependabot configuration
+# Note: DevPulse uses Python stdlib only, but this monitors GitHub Actions
+
+version: 2
+updates:
+  # Monitor GitHub Actions versions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    labels:
+      - "type/dependencies"
+      - "type/ci"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    reviewers:
+      - "devpulse-maintainers"
+    open-pull-requests-limit: 5

@@ -1,0 +1,34 @@
+# Label PRs based on modified files
+
+'type/documentation':
+  - 'docs/**/*'
+  - '**/*.md'
+
+'type/core':
+  - 'core/**/*'
+
+'type/checks':
+  - 'checks/**/*'
+
+'type/utilities':
+  - 'utils/**/*'
+
+'type/templates':
+  - 'templates/**/*'
+
+'type/cli':
+  - 'devpulse.py'
+
+'type/gui':
+  - 'devpulse_gui.py'
+
+'type/examples':
+  - 'examples/**/*'
+
+'type/ci':
+  - '.github/**/*'
+
+'type/dependencies':
+  - 'requirements.txt'
+  - 'setup.py'
+  - 'pyproject.toml'

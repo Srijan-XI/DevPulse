@@ -1,0 +1,155 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g., v1.0.0)'
+        required: true
+
+jobs:
+  create-release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    
+    - name: Get version from tag or input
+      id: get_version
+      run: |
+        if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+        else
+          echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Run DevPulse self-check
+      run: |
+        python devpulse.py scan --path . --json > release-scan.json
+        cat release-scan.json
+    
+    - name: Generate changelog
+      id: changelog
+      run: |
+        # Get commits since last tag
+        LAST_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+        if [ -z "$LAST_TAG" ]; then
+          COMMITS=$(git log --pretty=format:"- %s (%h)" --no-merges)
+        else
+          COMMITS=$(git log ${LAST_TAG}..HEAD --pretty=format:"- %s (%h)" --no-merges)
+        fi
+        echo "CHANGELOG<<EOF" >> $GITHUB_OUTPUT
+        echo "$COMMITS" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+    
+    - name: Create distribution package
+      run: |
+        mkdir -p dist/devpulse-${{ steps.get_version.outputs.VERSION }}
+        
+        # Copy source files
+        cp -r *.py dist/devpulse-${{ steps.get_version.outputs.VERSION }}/
+        cp -r core checks utils templates dist/devpulse-${{ steps.get_version.outputs.VERSION }}/
+        cp -r docs examples dist/devpulse-${{ steps.get_version.outputs.VERSION }}/
+        cp README.md LICENSE .gitignore dist/devpulse-${{ steps.get_version.outputs.VERSION }}/
+        
+        # Create archive
+        cd dist
+        tar -czf devpulse-${{ steps.get_version.outputs.VERSION }}.tar.gz devpulse-${{ steps.get_version.outputs.VERSION }}
+        zip -r devpulse-${{ steps.get_version.outputs.VERSION }}.zip devpulse-${{ steps.get_version.outputs.VERSION }}
+        
+        # Create checksums
+        sha256sum devpulse-${{ steps.get_version.outputs.VERSION }}.tar.gz > checksums.txt
+        sha256sum devpulse-${{ steps.get_version.outputs.VERSION }}.zip >> checksums.txt
+    
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ steps.get_version.outputs.VERSION }}
+        name: DevPulse ${{ steps.get_version.outputs.VERSION }}
+        body: |
+          ## 🩺 DevPulse ${{ steps.get_version.outputs.VERSION }}
+          
+          A local-first development project health checker built with GitHub Copilot CLI.
+          
+          ### 📥 Installation
+          
+          ```bash
+          # Download and extract
+          tar -xzf devpulse-${{ steps.get_version.outputs.VERSION }}.tar.gz
+          cd devpulse-${{ steps.get_version.outputs.VERSION }}
+          
+          # Run CLI
+          python devpulse.py scan --path /path/to/project
+          
+          # Run GUI
+          python devpulse_gui.py
+          ```
+          
+          ### ✨ What's New
+          
+          ${{ steps.changelog.outputs.CHANGELOG }}
+          
+          ### 📋 Requirements
+          
+          - Python 3.10 or higher
+          - No external dependencies (standard library only)
+          
+          ### 🚀 Quick Start
+          
+          See [QUICKSTART.md](docs/QUICKSTART.md) for a 2-minute guide.
+          
+          ### 📊 Self-Check Results
+          
+          This release passed DevPulse's own health check ✅
+        files: |
+          dist/devpulse-${{ steps.get_version.outputs.VERSION }}.tar.gz
+          dist/devpulse-${{ steps.get_version.outputs.VERSION }}.zip
+          dist/checksums.txt
+          release-scan.json
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  test-release:
+    name: Test Release Package
+    needs: create-release
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    
+    steps:
+    - name: Download release asset
+      uses: robinraju/release-downloader@v1.9
+      with:
+        latest: true
+        fileName: "*.tar.gz"
+    
+    - name: Extract and test (Unix)
+      if: runner.os != 'Windows'
+      run: |
+        tar -xzf devpulse-*.tar.gz
+        cd devpulse-*
+        python devpulse.py scan --path .
+        echo "✅ Release package works on ${{ runner.os }}"
+    
+    - name: Extract and test (Windows)
+      if: runner.os == 'Windows'
+      run: |
+        tar -xzf devpulse-*.tar.gz
+        cd devpulse-*
+        python devpulse.py scan --path .
+        echo "✅ Release package works on Windows"

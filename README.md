@@ -123,9 +123,13 @@ cli/
 │   ├── DEVELOPMENT.md   # Technical docs
 │   ├── ARCHITECTURE.md  # Architecture diagrams
 │   └── ...              # More documentation
-└── examples/            # Example projects
-    ├── python-app/      # Python/Flask example
-    └── web-app/         # HTML/CSS/JS example
+├── examples/            # Example projects
+│   ├── python-app/      # Python/Flask example
+│   └── web-app/         # HTML/CSS/JS example
+└── .github/             # GitHub workflows & templates
+    ├── workflows/       # CI/CD, release, security
+    ├── ISSUE_TEMPLATE/  # Bug reports, feature requests
+    └── dependabot.yml   # Dependency management
 ```
 
 ## 🎯 What DevPulse Is (and Isn't)
@@ -155,6 +159,7 @@ Comprehensive documentation is available in the [`docs/`](docs/) folder:
 - **[GUI Guide](docs/GUI-GUIDE.md)** - Complete GUI user manual
 - **[Development Docs](docs/DEVELOPMENT.md)** - Technical architecture
 - **[Architecture Diagrams](docs/ARCHITECTURE.md)** - Visual system design
+- **[Project Structure](docs/PROJECT-STRUCTURE.md)** - Detailed codebase organization
 - **[Challenge Submission](docs/CHALLENGE.md)** - GitHub Copilot CLI Challenge
 - **[Project Summary](docs/PROJECT-SUMMARY.md)** - Overview and statistics
 - **[File Index](docs/INDEX.md)** - Complete file reference
@@ -173,7 +178,28 @@ python devpulse.py scan --path examples/web-app
 
 See [examples/README.md](examples/README.md) for details.
 
-## 📝 License
+## � GitHub Workflows
+
+DevPulse includes comprehensive GitHub Actions workflows for automation:
+
+- **[CI/CD](.github/workflows/ci.yml)** - Multi-OS testing (Ubuntu, Windows, macOS), linting, security scans, and dogfooding
+- **[Release Automation](.github/workflows/release.yml)** - Automated package creation and GitHub releases
+- **[CodeQL Security](.github/workflows/codeql.yml)** - Weekly security analysis
+- **[PR Auto-Labeling](.github/workflows/label-pr.yml)** - Automatic PR categorization
+- **[Stale Management](.github/workflows/stale.yml)** - Auto-close inactive issues/PRs
+- **[Greetings](.github/workflows/greetings.yml)** - Welcome first-time contributors
+- **[Issue Templates](.github/ISSUE_TEMPLATE/)** - Structured bug reports and feature requests
+- **[Dependabot](.github/dependabot.yml)** - Automated dependency updates
+
+See [.github/workflows/README.md](.github/workflows/README.md) for complete workflow documentation.
+## 🤝 Contributing
+
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for:
+- Development workflow
+- Code style guidelines
+- Testing procedures
+- PR submission process
+## �📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
@@ -182,4 +208,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Built entirely with **GitHub Copilot CLI**
 - Designed to showcase Copilot CLI's ability to rapidly build useful developer tools
 - Inspired by the need for quick, local project health checks
-# DevPulse
+

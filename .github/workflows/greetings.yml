@@ -1,0 +1,49 @@
+name: Greetings
+
+on:
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened]
+
+jobs:
+  greeting:
+    name: Welcome First-Time Contributors
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    
+    steps:
+    - name: Greet first-time contributors
+      uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: |
+          👋 **Welcome to DevPulse!**
+          
+          Thank you for opening your first issue! We appreciate you taking the time to contribute to the project.
+          
+          A maintainer will review your issue soon. In the meantime:
+          - Make sure you've provided all the necessary details
+          - Check out our [CONTRIBUTING.md](https://github.com/${{ github.repository }}/blob/main/CONTRIBUTING.md) guide
+          - Feel free to explore the [documentation](https://github.com/${{ github.repository }}/tree/main/docs)
+          
+          If you'd like to work on this issue yourself, let us know! We're happy to guide you through the process. 🚀
+        pr-message: |
+          🎉 **Congratulations on your first Pull Request!**
+          
+          Thank you for contributing to DevPulse! This is awesome! 🙌
+          
+          Here's what happens next:
+          1. ✅ Our CI/CD workflows will automatically test your changes
+          2. 📝 A maintainer will review your PR
+          3. 💬 We may suggest some changes or improvements
+          4. 🎯 Once approved, your contribution will be merged!
+          
+          While you wait:
+          - Ensure all CI checks pass (you'll see them below)
+          - Respond to any review comments
+          - Check out our [CONTRIBUTING.md](https://github.com/${{ github.repository }}/blob/main/CONTRIBUTING.md) if you haven't already
+          
+          Thanks for making DevPulse better! We appreciate your contribution! 🩺✨
