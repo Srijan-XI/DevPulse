@@ -47,23 +47,28 @@
 | [templates/LICENSE.txt](../templates/LICENSE.txt) | MIT License template |
 | [templates/gitignore.txt](../templates/gitignore.txt) | Comprehensive .gitignore template |
 
-## 🧪 Test Examples
+## 🧪 Example Projects
 
 | File | Purpose |
 |------|---------|
-| [test-examples/python-app/](test-examples/python-app/) | Sample Python project for testing |
-| [test-examples/python-app/app.py](test-examples/python-app/app.py) | Simple Flask app with TODO comments |
-| [test-examples/python-app/requirements.txt](test-examples/python-app/requirements.txt) | Python dependencies |
-| [test-examples/python-app/.env](test-examples/python-app/.env) | Environment file (for security testing) |
+| [examples/python-app/](../examples/python-app/) | Sample Python/Flask project for testing |
+| [examples/python-app/app.py](../examples/python-app/app.py) | Simple Flask app with TODO comments |
+| [examples/python-app/requirements.txt](../examples/python-app/requirements.txt) | Python dependencies |
+| [examples/python-app/.env](../examples/python-app/.env) | Environment file (for security testing) |
+| [examples/web-app/](../examples/web-app/) | Sample HTML/CSS/JS web application |
+| [examples/web-app/index.html](../examples/web-app/index.html) | HTML landing page |
+| [examples/web-app/styles.css](../examples/web-app/styles.css) | CSS styling |
+| [examples/web-app/app.js](../examples/web-app/app.js) | JavaScript functionality |
+| [examples/README.md](../examples/README.md) | Examples documentation |
 
 ## 📦 Project Files
 
 | File | Purpose |
 |------|---------|
-| [.gitignore](.gitignore) | Git ignore rules (auto-generated) |
-| [LICENSE](LICENSE) | MIT License (auto-generated) |
-| [challenge.txt](challenge.txt) | Original challenge prompt |
-| [draft.md](draft.md) | Initial planning and framework |
+| [.gitignore](../.gitignore) | Git ignore rules (auto-generated) |
+| [LICENSE](../LICENSE) | MIT License (auto-generated) |
+| [challenge.txt](../challenge.txt) | Original challenge prompt |
+| [draft.md](../draft.md) | Initial planning and framework |
 
 ## 🎯 Quick Navigation
 
