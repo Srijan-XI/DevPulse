@@ -1,7 +1,6 @@
 """Repository hygiene checks."""
 
 from typing import List, Dict, Any
-from pathlib import Path
 from utils.patterns import check_hygiene_files, count_todos
 
 

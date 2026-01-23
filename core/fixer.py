@@ -1,6 +1,5 @@
 """Fixer applies safe automatic fixes to project issues."""
 
-import os
 from pathlib import Path
 from typing import List, Dict, Any
 

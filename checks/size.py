@@ -1,7 +1,6 @@
 """File size and large file detection checks."""
 
 from typing import List, Dict, Any
-from pathlib import Path
 from utils.fs import get_file_size, format_size
 
 

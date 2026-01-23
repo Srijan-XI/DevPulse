@@ -1,7 +1,6 @@
 """Tech stack detection check."""
 
 from typing import List, Dict, Any
-from pathlib import Path
 from utils.patterns import detect_tech_stack
 
 

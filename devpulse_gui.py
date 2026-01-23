@@ -409,7 +409,7 @@ class DevPulseGUI:
 def main():
     """Main entry point for GUI."""
     root = Tk()
-    app = DevPulseGUI(root)
+    DevPulseGUI(root)
     root.mainloop()
 
 

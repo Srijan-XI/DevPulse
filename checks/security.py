@@ -1,7 +1,6 @@
 """Security-related checks (basic local scanning)."""
 
 from typing import List, Dict, Any
-from pathlib import Path
 from utils.patterns import scan_for_secrets
 
 
@@ -33,7 +32,7 @@ def run_security_check(metadata: Dict[str, Any]) -> List[Dict[str, Any]]:
                         gitignore_content = f.read()
                         if env_file in gitignore_content or '.env' in gitignore_content:
                             is_ignored = True
-                except:
+                except (OSError, UnicodeDecodeError):
                     pass
             
             if not is_ignored:

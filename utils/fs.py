@@ -1,6 +1,5 @@
 """Filesystem utilities for DevPulse."""
 
-import os
 from pathlib import Path
 from typing import List, Set
 
