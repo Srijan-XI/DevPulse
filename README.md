@@ -38,28 +38,48 @@ cd cli
 # No external dependencies needed! Uses only Python standard library
 ```
 
-**Windows Users:**
-```cmd
-# Run the installation script to verify setup
-install.bat
+**Quick Setup Scripts:**
 
-# Launch the interactive menu
-start.bat
+*Windows:*
+```cmd
+install.bat    # Verify Python setup
+start.bat      # Launch interactive menu
+```
+
+*Linux/macOS:*
+```bash
+chmod +x install.sh start.sh  # Make scripts executable (first time only)
+./install.sh   # Verify Python setup
+./start.sh     # Launch interactive menu
 ```
 
 ### Usage
 
-**Windows Launcher (Easiest for Windows users):**
+**Interactive Launcher (Easiest method):**
+
+*Windows:*
 ```cmd
 start.bat
+```
+
+*Linux/macOS:*
+```bash
+./start.sh
 ```
 - Interactive menu with all options
 - Launch GUI or CLI commands
 - User-friendly prompts and help
 
 **GUI Version (Recommended for beginners):**
-```bash
+
+*Windows:*
+```cmd
 python devpulse_gui.py
+```
+
+*Linux/macOS:*
+```bash
+python3 devpulse_gui.py
 ```
 - Visual interface with summary cards
 - One-click scanning and fixing
@@ -69,16 +89,33 @@ python devpulse_gui.py
 **CLI Version (For automation & CI/CD):**
 
 **Scan a project:**
+
+*Windows:*
+```cmd
+python devpulse.py scan                       # Scan current directory
+python devpulse.py scan --path C:\my\project  # Scan specific directory
+python devpulse.py scan --json                # Output as JSON
+```
+
+*Linux/macOS:*
 ```bash
-python devpulse.py scan                    # Scan current directory
-python devpulse.py scan --path /my/project # Scan specific directory
-python devpulse.py scan --json             # Output as JSON
+python3 devpulse.py scan                    # Scan current directory
+python3 devpulse.py scan --path /my/project # Scan specific directory
+python3 devpulse.py scan --json             # Output as JSON
 ```
 
 **Apply safe fixes:**
-```bash
+
+*Windows:*
+```cmd
 python devpulse.py fix --safe              # Apply all safe fixes automatically
 python devpulse.py fix --interactive       # Ask before each fix
+```
+
+*Linux/macOS:*
+```bash
+python3 devpulse.py fix --safe             # Apply all safe fixes automatically
+python3 devpulse.py fix --interactive      # Ask before each fix
 ```
 
 ## 📖 Example Output
@@ -119,6 +156,8 @@ cli/
 ├── devpulse_gui.py      # GUI application (tkinter)
 ├── install.bat          # Windows installation script
 ├── start.bat            # Windows interactive launcher
+├── install.sh           # Linux/macOS installation script
+├── start.sh             # Linux/macOS interactive launcher
 ├── core/                # Core functionality
 │   ├── scanner.py       # Orchestrates all checks
 │   ├── reporter.py      # Formats output
