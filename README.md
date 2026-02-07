@@ -38,7 +38,24 @@ cd cli
 # No external dependencies needed! Uses only Python standard library
 ```
 
+**Windows Users:**
+```cmd
+# Run the installation script to verify setup
+install.bat
+
+# Launch the interactive menu
+start.bat
+```
+
 ### Usage
+
+**Windows Launcher (Easiest for Windows users):**
+```cmd
+start.bat
+```
+- Interactive menu with all options
+- Launch GUI or CLI commands
+- User-friendly prompts and help
 
 **GUI Version (Recommended for beginners):**
 ```bash
@@ -100,6 +117,8 @@ Summary:
 cli/
 ├── devpulse.py          # CLI entry point
 ├── devpulse_gui.py      # GUI application (tkinter)
+├── install.bat          # Windows installation script
+├── start.bat            # Windows interactive launcher
 ├── core/                # Core functionality
 │   ├── scanner.py       # Orchestrates all checks
 │   ├── reporter.py      # Formats output
