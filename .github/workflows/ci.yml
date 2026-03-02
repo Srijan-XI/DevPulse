@@ -125,7 +125,7 @@ jobs:
       continue-on-error: true
     
     - name: Upload Bandit report
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       if: always()
       with:
         name: bandit-security-report
@@ -157,7 +157,7 @@ jobs:
         cat devpulse-report.json
     
     - name: Upload DevPulse report
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         name: devpulse-self-scan
         path: devpulse-report.json
