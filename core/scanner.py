@@ -7,6 +7,7 @@ from checks.stack import run_stack_check
 from checks.hygiene import run_hygiene_check
 from checks.security import run_security_check
 from checks.size import run_size_check
+from checks.cohesion import run_cohesion_check
 
 
 class Scanner:
@@ -51,6 +52,10 @@ class Scanner:
         # File size checks
         size_results = run_size_check(self.metadata)
         self.results.extend(size_results)
+        
+        # Cohesion and Coupling checks
+        cohesion_results = run_cohesion_check(self.metadata)
+        self.results.extend(cohesion_results)
         
         return self.results
     
