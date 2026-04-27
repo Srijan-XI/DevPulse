@@ -133,7 +133,7 @@ jobs:
     
     steps:
     - name: Download release asset
-      uses: robinraju/release-downloader@v1.12
+      uses: robinraju/release-downloader@v1.13
       with:
         latest: true
         fileName: "*.tar.gz"
