@@ -59,7 +59,7 @@ def run_security_check(metadata: Dict[str, Any]) -> List[Dict[str, Any]]:
                     'file': str(file_path.relative_to(root)),
                     'line': line_num,
                     'type': secret_type,
-                    'preview': matched_text
+                    'preview': '[REDACTED]'
                 })
     
     if secret_findings:
